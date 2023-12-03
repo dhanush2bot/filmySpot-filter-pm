@@ -891,6 +891,9 @@ async def auto_filter(client, msg, spoll=False):
             else:
                 return
     else:
+        # Check if the message is from a private chat
+        if msg.chat.type != "private":
+            return
         settings = await get_settings(msg.message.chat.id)
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
